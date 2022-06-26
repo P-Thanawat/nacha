@@ -86,6 +86,7 @@
                   borderColor: 'white',
                 }"
                 @click="addProductQty"
+                :disabled="loading"
                 >+</b-button
               >
               <b-row>
@@ -100,7 +101,10 @@
                 </b-col>
               </b-row>
               <div class="d-flex justify-content-end me-3 my-2">
-                <b-button type="submit" variant="warning">SAVE</b-button>
+                <b-button type="submit" variant="warning">
+                  <b-spinner small class="mr-1 ui-spinner" v-if="loading" />
+                  SAVE
+                </b-button>
               </div>
             </b-form>
           </b-card>
@@ -120,7 +124,6 @@
   import gql from "graphql-tag";
   import * as _ from "lodash";
   import { required } from "vuelidate/lib/validators";
-  // import { BIcon } from "bootstrap-vue";
 
   export default {
     apollo: {
@@ -154,6 +157,7 @@
     },
     data() {
       return {
+        loading: false,
         payload: {},
         selectedProducts: [],
         selectedSizes: [],
@@ -238,6 +242,7 @@
         this.selectedSauces = [];
       },
       async onSave() {
+        this.loading = true;
         const method = _.get(this, ["payload", "method"], "");
         const orderAt = _.get(this, ["payload", "orderDate"], "");
         const price = _.get(this, ["payload", "price"], "");
@@ -273,6 +278,7 @@
         });
 
         this.clearData();
+        this.loading = false;
       },
     },
   };
