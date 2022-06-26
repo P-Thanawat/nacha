@@ -101,7 +101,7 @@
                 </b-col>
               </b-row>
               <div class="d-flex justify-content-end me-3 my-2">
-                <b-button type="submit" variant="warning">
+                <b-button type="submit" variant="warning" :disabled="loading">
                   <b-spinner small class="mr-1 ui-spinner" v-if="loading" />
                   SAVE
                 </b-button>
@@ -116,7 +116,6 @@
 </template>
 
 <script>
-  // import HelloWorld from "./components/HelloWorld.vue";
   import DatePicker from "vue2-datepicker";
   import "vue2-datepicker/index.css";
   import VSelect from "vue-select";
