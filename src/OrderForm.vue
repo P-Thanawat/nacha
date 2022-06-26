@@ -239,6 +239,7 @@
         this.selectedQtys = [];
         this.selectedSizes = [];
         this.selectedSauces = [];
+        this.productQty = 1;
       },
       async onSave() {
         this.loading = true;
